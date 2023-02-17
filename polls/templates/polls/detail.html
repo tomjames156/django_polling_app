@@ -1,0 +1,31 @@
+{% extends 'polls/base.html' %}
+
+{% block content %}
+<div class="w-full p-6">
+    {% if question.choice_set.all %}
+
+    <form action="{% url 'polls:vote' question.id %}" method="post">
+    {% csrf_token %}
+    <fieldset>
+        <legend class="text-xl font-bold mb-2">{{ question.question_text }}</legend>
+        {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+        {% for choice in question.choice_set.all %}
+        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}"/>
+        <label for="choice{{ forloop.counter}} ">{{ choice.choice_text }}</label><br>
+        {% endfor %}
+    </fieldset>
+    <input class="btn btn-secondary mt-4" type="submit" value="Vote">
+    </form>
+    {%else %}
+        <p class="font-semibold">Question Does Not Exist</p>
+        <a class='btn btn-secondary mt-4' href="{% url 'polls:index' %}">Back to Home</a>
+    {% endif %}
+</div> 
+{% endblock %}
+
+<!-- <select class="select select-accent w-full max-w-xs">
+        <option disabled selected>Question: {{ question.question_text }}</option>        
+            {% for choice in choices %}
+                <option>{{ choice.choice_text }} <p class="text-xs">({{ choice.votes }} votes)</p></option>
+            {% endfor %}
+    </select> -->

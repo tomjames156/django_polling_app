@@ -1,0 +1,28 @@
+{% extends 'polls/base.html' %}
+
+{% block title %}Welcome | {% endblock %}
+
+{% block content%}
+    <!-- Polls  -->
+    <p class="pt-6 pl-6 text-2xl font-semibold">Vote in any polls you like. Just click the Poll below</p>
+    <div class="px-10 pt-4">
+        {% if latest_question_list %}
+        <ul class="list-disc flex flex-col gap-y-2">
+            {% for question in latest_question_list %}
+                <div class="flex gap-x-2">
+                    <li class="font-semibold px-2 w-fit rounded-lg hover:bg-primary">
+                        <a href={% url 'polls:detail' question.id %}>{{ question.question_text }}</a>
+                    </li> 
+                    <div class="tooltip tooltip-top tooltip-accent" data-tip="poll results">
+                        <a href={% url 'polls:results' question.id %}>
+                            <i class="fa-solid fa-square-poll-vertical text-accent hover:bg-primary rounded-lg"></i>
+                        </a>
+                    </div>
+                </div>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <p>No polls yet sir</p>
+        {% endif %}
+    </div>
+{% endblock %}

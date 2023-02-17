@@ -1,0 +1,23 @@
+{% extends 'polls/base.html' %}
+{% load static %}
+
+{% block title %} About | {% endblock %}
+
+{% block content %}
+
+    <div class="mx-auto p-6 w-full">
+        <h1 class="underline text-2xl font-semibold mb-2">About</h1>
+        <p>Pollz is a Django web application that allows users to vote in polls.</p>
+        <p>Github Repository for Pollz Web App:
+            <a class="text-yellow-600 underline hover:text-primary" href="https://github.com/tomjames156/polling_app" target="_blank" rel="norefferer">Polling App</a>
+        </p>
+        <p>Created by Tomisin Akinwande. Tutorial from the <a class="text-yellow-600 underline hover:text-primary" href="Django Documentation" rel="norefferer" target="_blank">Django Documentation</a></p>
+        <p class="mt-4 mb-2 text-xl font-semibold">Contact Me:</p>
+        <div class="grid grid-cols-2 min-w-1/2">
+            <a href="https://twitter.com/tomisnakinwande" rel="norefferer" target="_blank"><i class="fa-brands fa-twitter p-1 text-primary bg-black rounded-full"></i> Twitter <br><span class="text-yellow-600 text-sm hover:text-primary">@tomisnakinwande</span></a>
+            <a href="https://github.com/tomjames156" rel="norefferer" target="_blank"><i class="fa-brands fa-github p-1 text-primary bg-black rounded-full"></i> Github <br><span class="text-yellow-600 text-sm hover:text-primary">tomjames156</span></a>
+        </div>
+        {% comment %} <img src="{% static 'polls/images/wizzy.png' %}" alt="Wizzy-wizz"> {% endcomment %}
+    </div>
+
+{% endblock %}

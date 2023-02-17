@@ -1,0 +1,20 @@
+{% extends 'polls/base.html' %}
+
+{% block content %}
+    <div class="w-full p-6">
+        {% if choices %}
+        <p class="text-xl font-semibold mb-2">{{question}}</p>
+        <ul class="flex flex-col gap-y-1 mb-4 ml-2">
+            {% for choice in choices %}
+                <li>{{ choice.choice_text }} -- <span class='font-semibold'>{{ choice.votes }} vote{{ choice.votes|pluralize }}</span></li>
+                <progress class="progress progress-accent w-56" value="{{ choice.votes }}" max={{ total }}></progress>
+            {% endfor %}
+        </ul>
+
+        <a class="btn btn-secondary ml-2" href={% url 'polls:detail' question.id %}>Vote again</a>
+    {% else %}
+        <p class="font-semibold">Question Does Not Exist</p>
+        <a class='btn btn-secondary mt-4' href="{% url 'polls:index' %}">Back to Home</a>
+    <div>
+    {% endif %}
+{% endblock %}
