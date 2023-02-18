@@ -1,8 +1,9 @@
-from django.shortcuts import render, get_object_or_404, redirect, HttpResponseRedirect
+from django.shortcuts import render, get_object_or_404, HttpResponseRedirect
 from django.urls import reverse
-from django.db.models import F, FilteredRelation, Q
+from django.db.models import F
 from django.views import generic
 from django.utils import timezone
+from .forms import SearchForm
 from .models import Question, Choice
 
 # Create your views here.
@@ -48,8 +49,6 @@ class ResultsView(generic.DetailView):
         else:
             return []
 
-
-
 def vote(request, question_id):
     question = get_object_or_404(Question, pk=question_id)
     try:
@@ -67,3 +66,17 @@ def vote(request, question_id):
 
 def about(request):
     return render(request, 'polls/about.html')
+
+def search_polls(request):
+    if request.method == "POST":
+        search_text = request.POST.get('search_text')
+        search_results = list(Question.objects.filter(question_text__icontains=search_text).order_by('-pub_date'))
+        no_results = False
+        if search_results == []:
+            no_results = True
+        context = {
+            'latest_question_list': search_results,
+            'no_results': no_results
+        }
+
+    return render(request, 'polls/index.html', context)

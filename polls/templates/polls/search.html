@@ -1,0 +1,18 @@
+{% extends 'polls/base.html' %}
+
+{% block content %}
+<div class="p-6">
+    <form class="flex flex-col gap-y-2" action="{% url 'polls:search'%}" method="POST">
+        {% csrf_token %}
+        <label for="search_text" class="text-sm font-bold">Searching for: </label>
+        <div class="flex gap-x-1 h-fit-content items-center">
+            <input class="border-solid border-[1.35px] rounded-md border-neutral-700 px-2 py-1" type="text" id="search_text" name="search_text" placeholder="Enter some text" value={{ search_text_input }}>
+            <div>
+              <button type="submit" class="p-2 hover:bg-secondary rounded-full">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" /></svg>
+              </button>
+            </div>
+        </div>
+    </form>
+</div>
+{% endblock %}

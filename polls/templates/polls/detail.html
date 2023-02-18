@@ -4,7 +4,7 @@
 <div class="w-full p-6">
     {% if question.choice_set.all %}
 
-    <form action="{% url 'polls:vote' question.id %}" method="post">
+    <form action="{% url 'polls:vote' question.id %}" method="POST">
     {% csrf_token %}
     <fieldset>
         <legend class="text-xl font-bold mb-2">{{ question.question_text }}</legend>

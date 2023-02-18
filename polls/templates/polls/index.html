@@ -1,4 +1,5 @@
 {% extends 'polls/base.html' %}
+{% load static %}
 
 {% block title %}Welcome | {% endblock %}
 
@@ -9,18 +10,19 @@
         {% if latest_question_list %}
         <ul class="list-disc flex flex-col gap-y-2">
             {% for question in latest_question_list %}
-                <div class="flex gap-x-2">
+                <div class="flex gap-x-1">
                     <li class="font-semibold px-2 w-fit rounded-lg hover:bg-primary">
                         <a href={% url 'polls:detail' question.id %}>{{ question.question_text }}</a>
-                    </li> 
-                    <div class="tooltip tooltip-top tooltip-accent" data-tip="poll results">
-                        <a href={% url 'polls:results' question.id %}>
-                            <i class="fa-solid fa-square-poll-vertical text-accent hover:bg-primary rounded-lg"></i>
-                        </a>
+                    </li>
+                    <div class="tooltip">
+                        <a href="{% url 'polls:results' question.id %}"><i class="fa-solid fa-eye text-sm cursor-pointer"></i></a>
+                        <span class="tooltiptext text-sm">poll result</span>
                     </div>
                 </div>
             {% endfor %}
         </ul>
+        {% elif no_results %}
+            <p>No search results found</p>
         {% else %}
             <p>No polls yet sir</p>
         {% endif %}
